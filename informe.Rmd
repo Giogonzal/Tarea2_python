@@ -5,6 +5,7 @@ date: "2023-10-10"
 output:
   html_document:
     df_print: paged
+  pdf_document: default
 ---
 
 La integración de Python en RStudio se logra mediante la instalación de paquetes como "reticulate", que facilita la ejecución de código Python en un entorno de RStudio. Esta combinación de lenguajes ofrece un entorno completo y versátil para proyectos de análisis de datos y científicos que requieren el uso de ambas plataformas.
@@ -134,7 +135,7 @@ print(datos_ultimo_anios)
 ```
 En 2018, Ecuador tenía una puntuación más alta en la "escalera_vida" (6.128010) en comparación con Colombia (5.983512). Esto sugiere que, según la percepción de las personas, la calidad de vida y la felicidad eran ligeramente mejores en Ecuador en ese año.De la misma forma si se compara a nive global en el ùltimo año **5.502134340650895** se observa que Ecuador en 2018 superó la media global. Ecuador también tiene un valor ligeramente más alto en la métrica de "soporte_social" (0.851345) en comparación con Colombia (0.870970). Esto indica que, en términos de la percepción de apoyo social, Ecuador tenía una ligera ventaja en 2018.Además, la expectativa de vida ligeramente mayor (68.5 años) en comparación con Colombia (67.7 años). Esto sugiere que, en promedio, las personas en Ecuador podían esperar vivir un poco más que las personas en Colombia en ese año.De igual forma "libertad" mostró una ligera ventaja para Ecuador (0.869364) en comparación con Colombia (0.850766) en 2018, lo que indica que las personas en Ecuador percibían una mayor libertad en sus vidas.
 
-En resumen, según estos datos, en 2018, Ecuador tenía una percepción ligeramente mejor de la calidad de vida y la felicidad en comparación con Colombia. Además, Ecuador también tenía valores ligeramente más altos en las métricas de soporte social, expectativa de vida y libertad, posiblemente estos factores expliquen porque Ecuador tiene un mayor nivel de felicidad. Sin embargo, para un análisis riguroso es recomendables utilizar un modelo econométrico. 
+En resumen, según estos datos, en 2018, Ecuador tenía una percepción ligeramente mejor de la calidad de vida y la felicidad en comparación con Colombia. Además, Ecuador también tenía valores ligeramente más altos en las métricas de soporte social, expectativa de vida y libertad, posiblemente estos factores expliquen porque Ecuador tiene un mayor nivel de felicidad. Sin embargo, para un análisis riguroso es recomendable utilizar un modelo econométrico. 
 
 
 
