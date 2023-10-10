@@ -1,0 +1,140 @@
+---
+title: "Tarea 2 de la semana 3 Python"
+author: "Geovanna Gonzalez"
+date: "2023-10-10"
+output:
+  html_document:
+    df_print: paged
+---
+
+La integración de Python en RStudio se logra mediante la instalación de paquetes como "reticulate", que facilita la ejecución de código Python en un entorno de RStudio. Esta combinación de lenguajes ofrece un entorno completo y versátil para proyectos de análisis de datos y científicos que requieren el uso de ambas plataformas.
+
+
+```{r}
+library(reticulate)
+```
+
+## Paquetes a utilizar
+El paquete **os** se usa para tareas como la navegación por el sistema de archivos, la creación de directorios, la verificación de la existencia de archivos y más.
+
+```{python}
+import os
+```
+
+El paquete **glob** se utiliza principalmente para buscar y listar archivos en un directorio que cumplan con ciertos criterios de nombre.
+
+```{python}
+import glob
+```
+
+**Pandas** se utiliza ampliamente para cargar, limpiar, transformar y analizar datos tabulares, como hojas de cálculo o conjuntos de datos en formato CSV o Excel.
+
+```{python}
+import pandas as pd
+```
+
+**NumPy** es esencial para la manipulación de datos numéricos, cálculos matemáticos y estadísticos, y es ampliamente utilizado en áreas como la ciencia de datos, la ingeniería y la investigación científica.
+
+```{python}
+import numpy as np
+```
+
+**Matplotlib** se utiliza para visualizar datos y resultados en forma de gráficos. Puede generar gráficos personalizados para explorar y comunicar información de manera efectiva.
+
+```{python}
+import matplotlib.pyplot as plt
+```
+
+Una vez importados los paquetes a utilizar, se puede acceder al url, empleando la función read_csv() para la lectura de un archivo que se encuentra alojado en una página web. En esta situación, simplemente se proporciona la dirección web entre comillas como parte de los parámetros de la función.
+
+```{python}
+datos_feli = pd.read_csv('https://raw.githubusercontent.com/cienciadedatos/datos-de-miercoles/master/datos/2019/2019-08-07/felicidad.csv')
+datos_feli
+```
+Para este ejercicio se utilizará solo ciertas variables las 7 primeras. 
+```{python}
+data = datos_feli.iloc[:, 0:7]
+```
+
+
+Se filtra el conjunto de datos para seleccionar los datos correspondientes al primer año y al último año.
+
+```{python}
+primer_anio = datos_feli[datos_feli['anio'] == datos_feli['anio'].min()]
+ultimo_anio = datos_feli[datos_feli['anio'] == datos_feli['anio'].max()]
+
+```
+
+Medida de tendencia central y la dispersión para ambas selecciones
+
+```{python}
+media_primer_anio = primer_anio['escalera_vida'].mean()
+desviacion_primer_anio = primer_anio['escalera_vida'].std()
+
+```
+
+Para el primer año:
+
+```{python}
+media_primer_anio = primer_anio['escalera_vida'].mean()
+print(media_primer_anio )
+```
+```{python}
+desviacion_primer_anio = primer_anio['escalera_vida'].std()
+print(desviacion_primer_anio)
+```
+
+Para el último año:
+
+```{python}
+media_ultimo_anio = ultimo_anio['escalera_vida'].mean()
+print(media_ultimo_anio )
+```
+```{python}
+desviacion_ultimo_anio = ultimo_anio['escalera_vida'].std()
+print(desviacion_ultimo_anio)
+```
+o de ser el caso con un **describe()**
+
+```{python}
+data.describe()
+```
+
+
+En este caso, se analizará para 2 países de Sudamérica. Se procede a seleccionar Ecuador y Colombia para realizar un análisis comparativo :
+
+```{python}
+
+paises_especificos = ['Ecuador', 'Colombia']
+# Filtrar la columna 'Country' para mantener solo los países específicos
+data['pais'] = data['pais'].apply(lambda x: x if x in paises_especificos else '')
+
+# Crear un nuevo DataFrame solo con los países específicos
+datact = data[data['pais'].isin(paises_especificos)]
+
+```
+
+
+Obtener el primer año y el último: 
+
+```{python}
+# Obtener el primer año (mínimo) y el último año (máximo) en el DataFrame
+primer_anio = datact['anio'].min()
+ultimo_anio = datact['anio'].max()
+
+# Filtrar los datos para el primer y último año
+datos_primer_anios = datact[datact['anio'] == primer_anio]
+print(datos_primer_anios)
+```
+En 2006, Colombia mostraba una puntuación de "escalera_vida" de alrededor de 6.025, mientras que Ecuador tenía una calificación de aproximadamente 5.024. Esto sugiere que, en ese año en particular, la percepción de la calidad de vida o la felicidad en Colombia superaba a la de Ecuador. Sin embargo, al comparar estos valores con la media global de **6.446164272449635**, se observa que Colombia se acerca más a esta media, con una diferencia de aproximadamente 0.42 puntos. En contraste, Ecuador se encuentra a más de una unidad por debajo de la media global en esta métrica. Esta comparación subraya las diferencias significativas en la percepción de la calidad de vida entre ambos países en ese período.
+
+```{python}
+datos_ultimo_anios = datact[datact['anio'] == ultimo_anio]
+print(datos_ultimo_anios)
+```
+En 2018, Ecuador tenía una puntuación más alta en la "escalera_vida" (6.128010) en comparación con Colombia (5.983512). Esto sugiere que, según la percepción de las personas, la calidad de vida y la felicidad eran ligeramente mejores en Ecuador en ese año.De la misma forma si se compara a nive global en el ùltimo año **5.502134340650895** se observa que Ecuador en 2018 superó la media global. Ecuador también tiene un valor ligeramente más alto en la métrica de "soporte_social" (0.851345) en comparación con Colombia (0.870970). Esto indica que, en términos de la percepción de apoyo social, Ecuador tenía una ligera ventaja en 2018.Además, la expectativa de vida ligeramente mayor (68.5 años) en comparación con Colombia (67.7 años). Esto sugiere que, en promedio, las personas en Ecuador podían esperar vivir un poco más que las personas en Colombia en ese año.De igual forma "libertad" mostró una ligera ventaja para Ecuador (0.869364) en comparación con Colombia (0.850766) en 2018, lo que indica que las personas en Ecuador percibían una mayor libertad en sus vidas.
+
+En resumen, según estos datos, en 2018, Ecuador tenía una percepción ligeramente mejor de la calidad de vida y la felicidad en comparación con Colombia. Además, Ecuador también tenía valores ligeramente más altos en las métricas de soporte social, expectativa de vida y libertad, posiblemente estos factores expliquen porque Ecuador tiene un mayor nivel de felicidad. Sin embargo, para un análisis riguroso es recomendables utilizar un modelo econométrico. 
+
+
+
