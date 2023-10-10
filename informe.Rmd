@@ -2,10 +2,7 @@
 title: "Tarea 2 de la semana 3 Python"
 author: "Geovanna Gonzalez"
 date: "2023-10-10"
-output:
-  html_document:
-    df_print: paged
-  pdf_document: default
+output: pdf_document
 ---
 
 La integración de Python en RStudio se logra mediante la instalación de paquetes como "reticulate", que facilita la ejecución de código Python en un entorno de RStudio. Esta combinación de lenguajes ofrece un entorno completo y versátil para proyectos de análisis de datos y científicos que requieren el uso de ambas plataformas.
